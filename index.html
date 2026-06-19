@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乐鱼体育 · 站点介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
+            background: linear-gradient(145deg, #fce4d6 0%, #fbe9dc 45%, #f6e1d0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            line-height: 1.7;
+            color: #2b2b2b;
+        }
+
+        .page-card {
+            max-width: 820px;
+            width: 100%;
+            background: #fffffffa;
+            backdrop-filter: blur(2px);
+            border-radius: 48px 48px 32px 32px;
+            box-shadow: 0 20px 40px -12px rgba(170, 110, 70, 0.25),
+                        0 8px 20px rgba(0, 0, 0, 0.03);
+            padding: 2.8rem 2.8rem 3rem;
+            transition: all 0.25s ease;
+            border: 1px solid #fff4eb;
+        }
+
+        /* 文章标题区 */
+        .article-header {
+            margin-bottom: 2.2rem;
+            border-bottom: 2px solid #f1d9ca;
+            padding-bottom: 1.2rem;
+        }
+
+        .article-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #4f3122;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, #6f3f2a, #985f43);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #a4816b;
+            margin-top: 0.25rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.1rem;
+            color: #7a5e4c;
+            font-style: italic;
+            margin-top: 0.4rem;
+            font-weight: 380;
+            border-left: 4px solid #ddb6a1;
+            padding-left: 1rem;
+        }
+
+        /* 正文排版 */
+        .content p {
+            margin-bottom: 1.6rem;
+            font-size: 1.02rem;
+            color: #382b23;
+        }
+
+        .content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .pull-quote {
+            background: #f8ede6;
+            border-left: 6px solid #c79578;
+            padding: 1.2rem 1.8rem;
+            margin: 2rem 0 1.8rem;
+            border-radius: 20px 8px 8px 20px;
+            font-size: 1rem;
+            color: #4f392a;
+            box-shadow: inset 0 1px 4px rgba(180, 120, 80, 0.08);
+            font-style: normal;
+            position: relative;
+        }
+
+        .pull-quote::before {
+            content: "“";
+            font-size: 3.2rem;
+            color: #dbb09a;
+            line-height: 1;
+            position: absolute;
+            left: 0.8rem;
+            top: -0.2rem;
+            font-family: Georgia, serif;
+            opacity: 0.5;
+        }
+
+        .pull-quote span {
+            display: block;
+            margin-left: 1rem;
+        }
+
+        .inline-link {
+            color: #b26d4a;
+            text-decoration: none;
+            font-weight: 500;
+            padding-bottom: 2px;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .inline-link:hover {
+            border-bottom-color: #b26d4a;
+            color: #7d4c31;
+            background: #f7e7de;
+        }
+
+        /* 引用 / 提示块 */
+        .insight-box {
+            background: #f4e5d9;
+            border-radius: 24px;
+            padding: 1.2rem 1.8rem;
+            margin: 2rem 0 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.98rem;
+            color: #3f2e21;
+            box-shadow: 0 2px 8px rgba(150, 90, 50, 0.08);
+        }
+
+        .insight-box strong {
+            background: #cda185;
+            color: #fbf3ed;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .visit-sentence {
+            background: #f6eae1;
+            padding: 1.2rem 2rem;
+            border-radius: 60px 20px 20px 60px;
+            margin-top: 2rem;
+            font-size: 1.04rem;
+            color: #3a2b20;
+            border: 1px solid #e7cfbe;
+            display: inline-block;
+            width: auto;
+        }
+
+        .visit-sentence a {
+            color: #9b6547;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #dbb29b;
+            transition: all 0.2s;
+        }
+
+        .visit-sentence a:hover {
+            color: #6a3f29;
+            border-bottom-color: #8b5d43;
+            background: #f2ddd0;
+        }
+
+        .faq-mini {
+            margin-top: 2.8rem;
+            padding-top: 1.8rem;
+            border-top: 2px dashed #e6d3c5;
+        }
+
+        .faq-mini h3 {
+            font-size: 1.1rem;
+            color: #5f3f2d;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.6rem;
+            background: #fcf5ef;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid #eddacd;
+            transition: 0.2s;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            color: #5c4030;
+            cursor: pointer;
+            padding: 0.3rem 0;
+        }
+
+        .faq-mini details[open] summary {
+            color: #7c523a;
+        }
+
+        .faq-mini details p {
+            margin: 0.5rem 0 0.2rem;
+            padding-left: 0.3rem;
+            font-size: 0.95rem;
+            color: #4f3a2b;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .page-card {
+                padding: 1.8rem 1.2rem 2.2rem;
+                border-radius: 32px;
+            }
+
+            .article-title {
+                font-size: 1.65rem;
+            }
+
+            .pull-quote {
+                padding: 1rem 1.2rem 1rem 1.8rem;
+                margin-left: -0.2rem;
+            }
+
+            .visit-sentence {
+                padding: 0.8rem 1.2rem;
+                border-radius: 30px;
+                font-size: 0.95rem;
+                display: block;
+                text-align: center;
+            }
+
+            .insight-box {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .article-title {
+                font-size: 1.4rem;
+            }
+
+            body {
+                padding: 1rem 0.8rem;
+            }
+
+            .article-subtitle {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* 脚注 */
+        .footer-note {
+            margin-top: 2.2rem;
+            font-size: 0.8rem;
+            color: #9a7c6a;
+            text-align: center;
+            border-top: 1px solid #edd9cb;
+            padding-top: 1.5rem;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-card">
+        <div class="article-header">
+            <h1 class="article-title">关于站点 · 一份平实的说明</h1>
+            <div class="article-meta">
+                <span>叙述向</span>
+                <span>·</span>
+                <span>可信视角</span>
+            </div>
+            <div class="article-subtitle">
+                保持简洁，只讲真实感受与使用场景。
+            </div>
+        </div>
+
+        <div class="content">
+            <p>
+                认识一个平台，往往从一次偶然的搜索或朋友闲聊开始。当你看到 <strong>乐鱼体育</strong> 这个名字，或许会好奇：它是一个怎样的站点？内容是否可靠？日常使用起来顺不顺手？这篇文章正是想从站点介绍与可信说明的角度，和你聊一聊。
+            </p>
+
+            <p>
+                <a href="https://mapp-leyu.com.cn" class="inline-link">乐鱼体育</a> 是一个以体育资讯、赛事动态和兴趣社区为主要方向的网站。界面设计偏向清晰直接，没有太多花哨的弹窗或分散注意力的广告，整体观感比较清爽。从访问体验来说，页面加载速度在多数网络环境下都表现稳定，不拖沓。
+            </p>
+
+            <div class="pull-quote">
+                <span>“与其追逐夸张的口号，不如把时间花在了解站点本身的调性与边界上。”</span>
+            </div>
+
+            <p>
+                在可信度方面，站内信息基本都标注了来源或数据参考，没有发现刻意夸大或诱导分享的内容。对于体育爱好者而言，这里提供的数据更新频率和赛事覆盖面都算用心，尤其是一些非热门联赛的报道，反而比大型综合门户更细致。日常浏览时，评论区的氛围也比较克制，没有明显的引战或虚假账号痕迹。
+            </p>
+
+            <p>
+                当然，任何网站都有其侧重。如果你追求极简的阅读体验，同时希望看到有温度而不是单纯堆砌数据的报道，那么 <a href="https://mapp-leyu.com.cn" class="inline-link">乐鱼体育</a> 或许能契合你的习惯。站内没有强制注册才能浏览全文的设置，大部分内容对访客开放，这在一定程度上降低了了解成本。
+            </p>
+
+            <div class="insight-box">
+                <strong>一点观察</strong>
+                <span>站点运营者似乎更倾向于「慢更新、少打扰」的思路，没有频繁推送通知或诱导下载 App。</span>
+            </div>
+
+            <p>
+                就个人感受而言，把这个网站当作一个日常获取体育资讯的补充渠道，是比较踏实的。它不会承诺“独家内幕”或“百分百命中”，但提供的信息有据可查，排版也照顾到了移动端的阅读舒适度。如果你对某个联赛或运动项目有持续关注的兴趣，可以试着浏览几篇文章，体会一下内容风格是否对味。
+            </p>
+        </div>
+
+        <div class="visit-sentence">
+            如果你愿意，可以通过 <a href="https://mapp-leyu.com.cn">乐鱼体育</a> 直接看看站内的最新文章与赛事数据。
+        </div>
+
+        <!-- FAQ 摘要 简洁明快 -->
+        <div class="faq-mini">
+            <h3>常见疑问 · 简摘</h3>
+            <details>
+                <summary>这个网站需要付费或注册才能用吗？</summary>
+                <p>不需要。绝大多数内容公开可读，注册功能仅为可选，不影响基础浏览。</p>
+            </details>
+            <details>
+                <summary>信息更新频率如何？</summary>
+                <p>主要赛事期间每天都有新内容，休赛期保持每周几次的更新节奏，不灌水。</p>
+            </details>
+            <details>
+                <summary>移动端体验如何？</summary>
+                <p>适配做得不错，按钮和链接间距友好，横竖屏切换流畅。</p>
+            </details>
+        </div>
+
+        <div class="footer-note">
+            · 叙述基于实际体验 · 无诱导表述 · 保持克制与真实 ·
+        </div>
+    </div>
+</body>
+</html>
