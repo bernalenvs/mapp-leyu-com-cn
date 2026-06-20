@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欧博 · 信息与知识库</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f2f4f6;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
+            color: #1e2a3a;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* hero 头部卡片区 */
+        .hero-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.02);
+            border: 1px solid #e6eaef;
+            padding: 2.8rem 2.5rem 3rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .hero-card h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0b1a2b;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .hero-card h1 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #68768a;
+            margin-left: 0.8rem;
+            background: #eef1f5;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+        }
+        .hero-desc {
+            font-size: 1.2rem;
+            color: #2b3a4c;
+            max-width: 800px;
+            margin-bottom: 1.5rem;
+        }
+        .hero-desc a {
+            color: #1d4e89;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid #bcc9da;
+            transition: border-color 0.15s;
+        }
+        .hero-desc a:hover {
+            border-bottom: 1px solid #0b2b52;
+            color: #0b2b52;
+        }
+        .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+            margin-top: 0.8rem;
+        }
+        .meta-tags span {
+            font-size: 0.9rem;
+            background: #edf0f4;
+            padding: 0.25rem 1rem;
+            border-radius: 32px;
+            color: #3b4b5e;
+            border: 1px solid #dde3ea;
+        }
+
+        /* 卡片网格布局：目录感 */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e3e9f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.02);
+            padding: 1.8rem 2rem;
+            transition: transform 0.15s ease, box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04), 0 2px 6px rgba(0,0,0,0.02);
+            transform: translateY(-2px);
+        }
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #14273e;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #e9eef4;
+            letter-spacing: -0.01em;
+        }
+        .card p, .card li {
+            color: #2c3d52;
+            font-size: 1rem;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .card li {
+            padding: 0.4rem 0 0.4rem 1.8rem;
+            position: relative;
+        }
+        .card li::before {
+            content: "○";
+            position: absolute;
+            left: 0;
+            color: #8498ae;
+            font-size: 1.1rem;
+        }
+        .inline-link {
+            color: #1d4e89;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #c7d3e2;
+        }
+        .inline-link:hover {
+            border-bottom: 1px solid #1d4e89;
+        }
+
+        /* 提示区 & 说明区 (全宽卡片) */
+        .info-card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e3e9f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            padding: 1.8rem 2.2rem;
+            margin-bottom: 1.8rem;
+        }
+        .info-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #162b42;
+            margin-bottom: 0.8rem;
+        }
+        .info-card p {
+            color: #33465c;
+            margin-bottom: 0.5rem;
+        }
+        .info-card p:last-child {
+            margin-bottom: 0;
+        }
+        .info-card .label {
+            display: inline-block;
+            background: #e4ebf3;
+            padding: 0.1rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #28415a;
+            margin-right: 0.4rem;
+        }
+
+        /* FAQ 摘要 – 精简 */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+        .faq-item {
+            background: #f7f9fc;
+            border-radius: 14px;
+            padding: 1rem 1.4rem;
+            border: 1px solid #e2e9f1;
+        }
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1a3049;
+            margin-bottom: 0.3rem;
+        }
+        .faq-item p {
+            font-size: 0.9rem;
+            color: #3d5269;
+            margin: 0;
+        }
+
+        /* 响应式 */
+        @media (max-width: 760px) {
+            body { padding: 1rem 0.8rem; }
+            .hero-card { padding: 2rem 1.2rem; }
+            .hero-card h1 { font-size: 2.2rem; }
+            .hero-desc { font-size: 1.05rem; }
+            .grid-2col { grid-template-columns: 1fr; gap: 1.2rem; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .card { padding: 1.5rem 1.2rem; }
+            .info-card { padding: 1.4rem 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-card h1 { font-size: 1.8rem; }
+            .hero-card h1 small { font-size: 0.8rem; margin-left: 0.3rem; }
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6e7f94;
+            margin-top: 2.8rem;
+            border-top: 1px solid #dce2ea;
+            padding-top: 1.8rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Hero 区域：介绍站点定位与可信说明 -->
+    <div class="hero-card">
+        <h1>
+            欧博
+            <small>知识库·信息目录</small>
+        </h1>
+        <div class="hero-desc">
+            <p>欢迎来到 <a href="https://m-index-oubo.com">欧博</a> 的内容索引页。这里汇集了关于站点背景、功能范围和使用方式的说明，帮助访问者快速建立对 <strong>欧博</strong> 的完整认知。本站并非单一功能入口，而是一份结构化的信息参考，所有内容均基于可查证的信息整合而成。</p>
+        </div>
+        <div class="meta-tags">
+            <span>信息目录</span>
+            <span>参考说明</span>
+            <span>知识索引</span>
+            <span>可信来源</span>
+        </div>
+    </div>
+
+    <!-- 两列卡片：目录感布局，介绍区与特点区 -->
+    <div class="grid-2col">
+        <!-- 卡片1: 站点介绍与背景 -->
+        <div class="card">
+            <h2>站点介绍</h2>
+            <p>关于 <a href="https://m-index-oubo.com" class="inline-link">欧博</a> 的基本信息：该平台作为资源与信息的聚合节点，面向不同背景的用户提供结构化的内容。在运营过程中，平台始终关注信息的时效性与可溯源性，并且保持相对克制的呈现方式。本站介绍页即为此理念的延伸——不夸大、不虚构，只陈述可被验证的框架。</p>
+            <p style="margin-top: 0.8rem;">页面内容基于公开资料整理，涵盖领域包括但不限于使用场景、常见问题与辅助提示。如需深入了解，可直接通过上方链接浏览主站。</p>
+        </div>
+
+        <!-- 卡片2: 特点与可信说明 -->
+        <div class="card">
+            <h2>特点与可信说明</h2>
+            <ul>
+                <li>透明来源：所有公开信息均标注参考背景，不引入未经核实的断言。</li>
+                <li>模块化结构：分类清晰，便于按需查找，避免信息过载。</li>
+                <li>持续校准：定期比对源站内容，确保索引与说明保持一致。</li>
+                <li>无诱导设计：页面不采用浮夸按钮或引导话术，尊重访问者的自主判断。</li>
+            </ul>
+            <p style="margin-top: 0.8rem; font-size: 0.95rem;">上述特点使得 <a href="https://m-index-oubo.com" class="inline-link">欧博</a> 在信息呈现上具有可参考的严谨性，适合需要快速定位关键内容的用户。</p>
+        </div>
+    </div>
+
+    <!-- 说明区 + 提示区 (并排风格但使用全宽卡片分段) -->
+    <div class="info-card">
+        <h3>📘 说明区 · 信息定位</h3>
+        <p><span class="label">范围</span> 本索引页主要涵盖站点结构概述、功能模块分类以及使用前需了解的背景。不涉及具体操作步骤或个人数据。</p>
+        <p><span class="label">更新</span> 说明内容会跟随主站调整而修订，最后对齐日期为近期版本。建议搭配主站最新信息一同查阅。</p>
+        <p><span class="label">关联</span> 如需直接访问主站，可点击文中 <a href="https://m-index-oubo.com" class="inline-link">欧博</a> 链接。该链接目前保持有效，且指向官方域名。</p>
+    </div>
+
+    <div class="info-card">
+        <h3>💡 提示区 · 使用参考</h3>
+        <p>• 如果您是首次接触 <strong>欧博</strong>，建议先浏览介绍卡片与 FAQ 摘要，再通过主站探索具体内容。</p>
+        <p>• 页面中的链接均采用自然语言嵌入，避免生硬跳转提示，您可自行决定浏览节奏。</p>
+        <p>• 部分术语或功能模块可能会随版本迭代而调整，请以主站实际界面为准。</p>
+    </div>
+
+    <!-- 相关信息区：FAQ 摘要 -->
+    <div class="card" style="margin-bottom: 1.8rem;">
+        <h2>❓ 相关信息 · FAQ 摘要</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <strong>欧博 是否提供即时客服？</strong>
+                <p>主站设有常见问题专区，可先查阅自助信息。若仍存疑问，可通过站内指定渠道提交询问。</p>
+            </div>
+            <div class="faq-item">
+                <strong>页面内容的更新频率？</strong>
+                <p>本介绍页随主站结构变化不定期同步。主要字段如链接、分类名称会优先保持准确。</p>
+            </div>
+            <div class="faq-item">
+                <strong>需要注册才能使用主站吗？</strong>
+                <p>部分功能可能需要账号，但基础浏览与信息查阅通常开放。具体请参考站内指引。</p>
+            </div>
+            <div class="faq-item">
+                <strong>如何确认信息权威性？</strong>
+                <p>建议交叉对比站内多个页面，同时留意日期标记。本索引仅作辅助，不替代官方说明。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 轻微分隔 + 收束说明 -->
+    <div style="background: #f2f4f6; padding: 0.2rem 0;">
+        <p style="font-size: 0.9rem; color: #5b6e83; text-align: center; margin: 0.5rem 0;">
+            本页为知识库入口式索引，内容仅供信息参考。主站请访问 <a href="https://m-index-oubo.com" style="color: #1d4e89; text-decoration: none;">欧博</a>。
+        </p>
+    </div>
+
+    <div class="footer-note">
+        基于可靠信息整理 · 目录结构持续完善
+    </div>
+</div>
+</body>
+</html>
